@@ -1,0 +1,59 @@
+[project]
+name = "fals"
+version = "0.1.0"
+description = "Code to reproduce figures"
+requires-python = ">=3.11"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+[tool.pixi.pypi-dependencies]
+fals = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+boto3 = "<2.0"
+duckdb = ">=1.0"
+jupyter = ">=1.1"
+jupyterlab = ">=4.3"
+numpy = ">=2.0"
+pandas = ">=2.0"
+pyarrow = "18.0.0"
+redun = ">=0.22"
+s3fs = ">=2024.10"
+scanpy = ">=1.10"
+scikit-learn = ">=1.5"
+seaborn = ">=0.13"
+statsmodels = ">=0.14"
+
+[project.optional-dependencies]
+dev = ["ruff"]
+
+[tool.ruff]
+line-length = 99
+
+[tool.ruff.lint]
+exclude = [
+    "notebooks/*"
+]
+ignore = [
+    "E203",
+    "E701",
+    "E731",
+]
+select = [
+    "C90", # mccabe
+    "E", # pycodestyle
+    "F", # pyflakes
+    "I", # isort
+    "W", # pycodestyle
+    "RUF100", # unnecessary noqa
+    "TID251", # banned imports
+    "TID252", # no relative imports
+]
